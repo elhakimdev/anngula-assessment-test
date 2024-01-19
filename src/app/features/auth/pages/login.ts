@@ -30,5 +30,6 @@ export class LoginComponent implements OnInit {
   };
   handleClick(){
     console.log(this.loginForm.getRawValue());
+    // TO Do: implement login
   }
 }
