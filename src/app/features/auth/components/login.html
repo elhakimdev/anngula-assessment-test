@@ -1,0 +1,44 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 font-roboto">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-56 w-auto" src="./../../../../assets/images/png/employee.png" alt="Your Company">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to Employeer</h2>
+  </div>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="flex flex-col" [formGroup]="loginForm">
+      <kendo-floatinglabel text="Email"> 
+        <kendo-textbox #email size="large" placeholder="email" formControlName="email" required showSuccessIcon="initial" showErrorIcon="initial"></kendo-textbox>
+        <kendo-formerror>
+          <div *ngIf="loginForm.get('email')?.invalid && 
+          loginForm.get('email')?.errors && 
+          (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+            <div class="text-red-700 italic" *ngIf="loginForm.get('email')?.hasError('required')">
+              This Email field is required.
+            </div>
+            <div class="text-red-700 italic" *ngIf="loginForm.get('email')?.hasError('email')">
+              This should contains a valid email.
+            </div>
+          </div>
+        </kendo-formerror>
+      </kendo-floatinglabel>
+      <kendo-floatinglabel text="Password">
+        <kendo-textbox size="large" placeholder="password" formControlName="password" required showSuccessIcon="initial" showErrorIcon="initial"type="password"></kendo-textbox>
+        <kendo-formerror>
+          <div *ngIf="loginForm.get('password')?.invalid && 
+          loginForm.get('password')?.errors && 
+          (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+            <div class="text-red-700 italic" *ngIf="loginForm.get('password')?.hasError('required')">
+              This Password field is required.
+            </div>
+          </div>
+        </kendo-formerror>
+      </kendo-floatinglabel>
+      <kendo-button class="my-5" size="large" (click)="handleClick()" [disabled]="loginForm.invalid">Login</kendo-button>
+    </form>
+  </div>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <p class="mt-10 text-center text-sm text-gray-500">
+      Not a member?
+      <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Creeate your account</a>
+    </p>
+  </div>
+</div>
