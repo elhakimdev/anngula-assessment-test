@@ -12,6 +12,7 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { FloatingLabelModule } from '@progress/kendo-angular-label';
 import { AuthService, ResultData, _jwtSecret } from '../services/auth';
+import { Router } from '@angular/router';
 @Component({
   templateUrl: "../components/login.html",
   standalone: true,
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router: Router
   ){
     this.loginForm = this.formBuilder.group({
       email: new FormControl("", [Validators.required, Validators.email]),
@@ -57,6 +59,8 @@ export class LoginComponent implements OnInit {
         isLoggedIn: true,
       })
       localStorage.setItem("_data", JSON.stringify(_toBeStored));
+
+      this.router.navigateByUrl("employees");
     })
   }
 }
