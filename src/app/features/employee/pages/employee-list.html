@@ -5,15 +5,65 @@
     </div>
     <div class="mt-3">
       <kendo-grid
-          [kendoGridBinding]="gridView"
-          [style.height]="'45%'"
-          [kendoGridBinding]="gridData"
-          [pageSize]="10"
-          [pageable]="true"
-          [sortable]="true"
-          [filterable]="true"
-          [groupable]="true"
+        [kendoGridBinding]="gridView"
+        kendoGridSelectBy="id"
+        [style.height]="'45%'"
+        [pageSize]="10"
+        [pageable]="true"
+        [sortable]="true"
+        [filterable]="true"
+        [groupable]="true"
+        [reorderable]="true"
+        [resizable]="true"
+        [columnMenu]="{ filter: true }"
+      >
+
+        <ng-template kendoGridToolbarTemplate>
+          <kendo-textbox
+            [style.width.px]="165"
+            placeholder="Search in all columns..."
+            (valueChange)="onFilterHandler($event)"
+          ></kendo-textbox>
+          <kendo-grid-spacer></kendo-grid-spacer>
+        </ng-template>
+
+        <kendo-grid-checkbox-column
+          [width]="45"
+          [headerClass]="{ 'text-center': true }"
+          [class]="{ 'text-center': true }"
+          [resizable]="false"
+          [columnMenu]="false"
+          [showSelectAll]="true"
+        ></kendo-grid-checkbox-column>
+
+        <kendo-grid-column field="id" title="ID" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="username" title="Username" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="email" title="E-mail" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="basicSalary" title="Base Sallary" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="group" title="Group / Department" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column field="status" title="Status" [width]="220">
+        </kendo-grid-column>
+
+        <kendo-grid-column
+          [columnMenu]="false"
+          [title]="'Action'"
         >
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <div>
+              
+            </div>
+          </ng-template>
+        </kendo-grid-column>
       </kendo-grid>
     </div>
   </div>
