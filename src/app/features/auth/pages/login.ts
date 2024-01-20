@@ -12,8 +12,6 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { FloatingLabelModule } from '@progress/kendo-angular-label';
 import { AuthService, ResultData, _jwtSecret } from '../services/auth';
-import { SecureEncrypteStorageService } from '../services/encrypted-storager';
-import { EncryptStorage } from 'encrypt-storage';
 @Component({
   templateUrl: "../components/login.html",
   standalone: true,
