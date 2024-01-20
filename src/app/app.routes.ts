@@ -23,6 +23,18 @@ export const routes: Routes = [
       {
         path: "",
         component: EmployeeComponent
+      },
+      {
+        path: ":id/show",
+        redirectTo: "employees"
+      },
+      {
+        path: ":id/update",
+        redirectTo: "employees"
+      },
+      {
+        path: ":id/delete",
+        redirectTo: "employees"
       }
     ]
   }

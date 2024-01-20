@@ -25,6 +25,7 @@
             (valueChange)="onFilterHandler($event)"
           ></kendo-textbox>
           <kendo-grid-spacer></kendo-grid-spacer>
+          <button kendoGridAddCommand type="button" [primary]="true" [themeColor]="'info'" [fillMode]="'outline'">Add Emmployee</button>
         </ng-template>
 
         <kendo-grid-checkbox-column
@@ -54,16 +55,6 @@
         <kendo-grid-column field="status" title="Status" [width]="220">
         </kendo-grid-column>
 
-        <kendo-grid-column
-          [columnMenu]="false"
-          [title]="'Action'"
-        >
-          <ng-template kendoGridCellTemplate let-dataItem>
-            <div>
-              
-            </div>
-          </ng-template>
-        </kendo-grid-column>
       </kendo-grid>
     </div>
   </div>

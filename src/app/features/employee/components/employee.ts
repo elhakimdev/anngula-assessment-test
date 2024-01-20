@@ -8,6 +8,7 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { DataBindingDirective } from "@progress/kendo-angular-grid";
 import { Employye } from '../model/employee';
 import { process } from "@progress/kendo-data-query";
+import { RouterLink } from '@angular/router';
 // import { BrowserModule } from "@angular/platform-browser";
 // import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 // @NgModule({
@@ -24,6 +25,7 @@ import { process } from "@progress/kendo-data-query";
     GridModule,
     ButtonsModule,
     InputsModule,
+    RouterLink
     // BrowserModule,
     // BrowserAnimationsModule
   ]
@@ -33,7 +35,7 @@ export class EmployeeComponent implements OnInit {
   public gridData: Employye[] = [];
   public gridView: Employye[] = [];
   constructor(private service: EmployeeService){
-    console.log(this.service.employees);
+    // console.log(this.service.employees);
     this.gridData = [...this.service.employees]
   }
   ngOnInit(): void {
