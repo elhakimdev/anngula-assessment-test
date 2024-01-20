@@ -17,6 +17,10 @@ export interface Credentials {
   }
 }
 
+export interface ResultData {
+  success: boolean,
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -50,27 +54,41 @@ export class AuthService {
     })
   }
 
-  login(options: LoginOptions, callback: <Err, Data>(err?: Err, data?: Data) => void): void {
-    console.log(this.credentials);
-
-    if(this.credentials.email !== options.payload.email){
-      callback(new Error("The given email is not valid email"));
-    }
-
-    this.validate(options.payload.password, (res) => {
-      // console.log("password" + res)
-      callback(undefined, {
-        success: res
-      })
-    })
-  }
-
   private validate(password: string, callback: (result?: boolean) => void) : void {
     compare(password, this.credentials.password, (error, res) => {
       if(error){
         throw new Error("Error during validate given credentials")
       }
       callback(res);
+    })
+  }
+
+  public login(options: LoginOptions, callback: <
+      Err, 
+      Data extends Record<string, unknown>
+    >(err?: Err, data?: Data extends Record<string, unknown> ? ResultData : Data) => void): void {
+    // console.log(this.credentials);
+
+    // validate email
+    if(this.credentials.email !== options.payload.email){
+      callback(new Error("The given email wasn't found"), {
+        success: false
+      });
+    }
+
+    // validate password
+    this.validate(options.payload.password, (res) => {
+      if(!res){
+        callback(new Error("The given credentials didnt match"), {
+          success: !res,
+        });
+      }
+
+      this.credentials.state.isLoggedIn = res as boolean;
+      
+      callback(undefined, {
+        success: res!,
+      })
     })
   }
 }

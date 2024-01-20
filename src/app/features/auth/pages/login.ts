@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
         throw err
       }
       // TO Do handle on successfull login data !
-      console.log(data)
+      // create an jwt and store inside localstorage !
+      console.log(data?.success);
     })
   }
 }
