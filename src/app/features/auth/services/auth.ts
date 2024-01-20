@@ -16,10 +16,13 @@ export interface Credentials {
     isLoggedIn: boolean
   }
 }
-
 export interface ResultData {
   success: boolean,
+  data?: {
+    email: string
+  }
 }
+export const _jwtSecret = "P4ssw2rd_s3cr3t" as const;
 
 @Injectable({
   providedIn: "root"
@@ -88,6 +91,9 @@ export class AuthService {
       
       callback(undefined, {
         success: res!,
+        data: {
+          email: this.credentials.email,
+        }
       })
     })
   }
