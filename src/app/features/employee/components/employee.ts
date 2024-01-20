@@ -1,17 +1,84 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../services/employee.service';
-
+import { FormsModule } from "@angular/forms";
+import { GridModule } from "@progress/kendo-angular-grid";
+import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { InputsModule } from "@progress/kendo-angular-inputs";
+import { DataBindingDirective } from "@progress/kendo-angular-grid";
+import { Employye } from '../model/employee';
+import { process } from "@progress/kendo-data-query";
+// import { BrowserModule } from "@angular/platform-browser";
+// import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+// @NgModule({
+//   imports: [
+//     BrowserAnimationsModule
+//   ]
+// })
 @Component({
   standalone: true,
   templateUrl: "./../pages/employee-list.html",
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    GridModule,
+    ButtonsModule,
+    InputsModule,
+    // BrowserModule,
+    // BrowserAnimationsModule
   ]
 })
-
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit {
+  @ViewChild(DataBindingDirective) dataBinding: DataBindingDirective | undefined;
+  public gridData: Employye[] = [];
+  public gridView: Employye[] = [];
   constructor(private service: EmployeeService){
-    // console.log(this.service.employees)
+    console.log(this.service.employees);
+    this.gridData = [...this.service.employees]
+  }
+  ngOnInit(): void {
+      this.gridView = this.gridData;
+  }
+  public onFilterHandler(value: Event): void{
+    const inputValue = value;
+    this.gridView = process(this.gridData, {
+      filter: {
+        logic: "and",
+        filters: [
+          {
+            field: "username",
+            operator: "contains",
+            value: inputValue
+          },
+          {
+            field: "email",
+            operator: "contains",
+            value: inputValue
+          },
+          {
+            field: "birthday",
+            operator: "contains",
+            value: inputValue
+          },
+          {
+            field: "basicSalary",
+            operator: "contains",
+            value: inputValue
+          },
+          {
+            field: "status",
+            operator: "contains",
+            value: inputValue
+          },
+          {
+            field: "group",
+            operator: "contains",
+            value: inputValue
+          },
+        ]
+      }
+    }).data;
+
+    this.dataBinding!.skip = 0;
   }
 }
