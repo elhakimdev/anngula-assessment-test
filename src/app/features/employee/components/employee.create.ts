@@ -90,6 +90,8 @@ export class EmployeeCreateComponent implements OnInit{
     })
   }
   public onCancelHandler(e: Event){
+    e.preventDefault();
+    this.createForm.reset();
     // e.preventDefault();
 
     // this.createForm.markAllAsTouched();

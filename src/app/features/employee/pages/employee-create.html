@@ -13,7 +13,7 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
       <span class="text-3xl">Add New Employee</span>
     </div>
     <div class="mt-10 w-full">
-      <form class="flex flex-col" [formGroup]="createForm">
+      <form class="flex flex-col gap-y-3" [formGroup]="createForm">
         <kendo-floatinglabel text="First Name"> 
           <kendo-textbox 
             #email 
@@ -23,6 +23,15 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             showSuccessIcon="initial" 
             showErrorIcon="initial">
           </kendo-textbox>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('firstName')?.invalid && 
+            createForm.get('firstName')?.errors && 
+            (createForm.get('firstName')?.dirty || createForm.get('firstName')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('firstName')?.hasError('required')">
+                This first name field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <kendo-floatinglabel text="Last Name"> 
@@ -34,6 +43,35 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             showSuccessIcon="initial" 
             showErrorIcon="initial">
           </kendo-textbox>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('lastName')?.invalid && 
+            createForm.get('lastName')?.errors && 
+            (createForm.get('lastName')?.dirty || createForm.get('lastName')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('lastName')?.hasError('required')">
+                This last name field is required.
+              </div>
+            </div>
+          </kendo-formerror>
+        </kendo-floatinglabel>
+
+        <kendo-floatinglabel text="Username"> 
+          <kendo-textbox 
+            #email 
+            placeholder="username" 
+            formControlName="username" 
+            required 
+            showSuccessIcon="initial" 
+            showErrorIcon="initial">
+          </kendo-textbox>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('username')?.invalid && 
+            createForm.get('username')?.errors && 
+            (createForm.get('username')?.dirty || createForm.get('username')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('username')?.hasError('required')">
+                This username field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <kendo-floatinglabel text="Email"> 
@@ -45,18 +83,53 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             showSuccessIcon="initial" 
             showErrorIcon="initial">
           </kendo-textbox>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('email')?.invalid && 
+            createForm.get('email')?.errors && 
+            (createForm.get('email')?.dirty || createForm.get('email')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('email')?.hasError('required')">
+                This email field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
-        <kendo-floatinglabel text="Birth Of Date"> 
+        <kendo-formfield>
+          <kendo-label text="Birth Of Date"> 
+          </kendo-label>
           <kendo-datepicker 
             formControlName="birthDate">
           </kendo-datepicker>
-        </kendo-floatinglabel>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('birthDate')?.invalid && 
+            createForm.get('birthDate')?.errors && 
+            (createForm.get('birthDate')?.dirty || createForm.get('birthDate')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('birthDate')?.hasError('required')">
+                This birth date field is required.
+              </div>
+              <div class="text-red-700 italic" *ngIf="createForm.get('birthDate')?.hasError('futureDate')">
+                This field shouldn't exceed today.
+              </div>
+            </div>
+          </kendo-formerror>
+        </kendo-formfield>
 
         <kendo-floatinglabel text="Basic Salarry"> 
           <kendo-numerictextbox 
             formControlName="basicSalary">
           </kendo-numerictextbox>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('birthDate')?.invalid && 
+            createForm.get('basicSalary')?.errors && 
+            (createForm.get('basicSalary')?.dirty || createForm.get('basicSalary')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('basicSalary')?.hasError('required')">
+                This birth date field is required.
+              </div>
+              <div class="text-red-700 italic" *ngIf="createForm.get('basicSalary')?.hasError('pattern')">
+                This field must follow required pattern
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <kendo-floatinglabel text="Group / Department"> 
@@ -64,6 +137,15 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             [data]="groups"
             formControlName="group">
           </kendo-dropdownlist>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('group')?.invalid && 
+            createForm.get('group')?.errors && 
+            (createForm.get('group')?.dirty || createForm.get('group')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('group')?.hasError('required')">
+                This group field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <kendo-floatinglabel text="Status"> 
@@ -71,6 +153,15 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             [data]="statuses"
             formControlName="status">
           </kendo-dropdownlist>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('status')?.invalid && 
+            createForm.get('status')?.errors && 
+            (createForm.get('status')?.dirty || createForm.get('status')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('status')?.hasError('required')">
+                This status field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <kendo-floatinglabel text="Description"> 
@@ -78,10 +169,19 @@ description: new FormControl("", [Validators.required]) as unknown as string -->
             resizable="vertical"
             formControlName="description">
           </kendo-textarea>
+          <kendo-formerror>
+            <div *ngIf="createForm.get('description')?.invalid && 
+            createForm.get('description')?.errors && 
+            (createForm.get('description')?.dirty || createForm.get('description')?.touched)">
+              <div class="text-red-700 italic" *ngIf="createForm.get('description')?.hasError('required')">
+                This description field is required.
+              </div>
+            </div>
+          </kendo-formerror>
         </kendo-floatinglabel>
 
         <div class="flex flex-row gap-x-3 mt-3">
-          <button kendoButton themeColor="primary" (click)="onSubmitHandler($event)">
+          <button kendoButton themeColor="primary" (click)="onSubmitHandler($event)" [disabled]="createForm.invalid">
             Send Create Request
           </button>
           <button kendoButton (click)="onCancelHandler($event)">Clear</button>
