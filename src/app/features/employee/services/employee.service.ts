@@ -3,6 +3,7 @@ import { Employye } from "../model/employee";
 // import { generateEmployee } from "../utils/generator";
 import { _Raw_Employees } from "../mocks/employee.raw";
 import { faker } from "@faker-js/faker";
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -33,6 +34,9 @@ export class EmployeeService {
         ...newEmp
       } 
     })
+  }
+  public show(id: string) : Observable<Employye> {
+    return of(this.employees.find((employe, i) => employe.id === id) as Employye)
   }
   public get employees() : Employye[] {
     return this._employees
