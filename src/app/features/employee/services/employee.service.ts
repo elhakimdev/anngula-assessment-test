@@ -14,7 +14,7 @@ export class EmployeeService {
   }
   protected loadEmployees() {
     this._employees = [..._Raw_Employees]
-    console.log(this._employees);
+    // console.log(this._employees);
   }
   public get employees() : Employye[] {
     return this._employees

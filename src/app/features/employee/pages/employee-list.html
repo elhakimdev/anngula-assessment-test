@@ -25,19 +25,26 @@
             (valueChange)="onFilterHandler($event)"
           ></kendo-textbox>
           <kendo-grid-spacer></kendo-grid-spacer>
-          <button kendoGridAddCommand type="button" [primary]="true" [themeColor]="'info'" [fillMode]="'outline'">Add Emmployee</button>
+            <a [routerLink]="'/employees/create'" class="px-3 py-2 rounded-md  bg-blue-500 hover:bg-blue-600">
+              <span class="text-white">Add New Employee</span>
+            </a>
         </ng-template>
 
-        <kendo-grid-checkbox-column
+        <!-- <kendo-grid-checkbox-column
           [width]="45"
           [headerClass]="{ 'text-center': true }"
           [class]="{ 'text-center': true }"
           [resizable]="false"
           [columnMenu]="false"
           [showSelectAll]="true"
-        ></kendo-grid-checkbox-column>
+        ></kendo-grid-checkbox-column> -->
 
-        <kendo-grid-column field="id" title="ID" [width]="220">
+        <kendo-grid-column field="id" title="ID (click to see details)" [width]="220">
+          <ng-template kendoGridCellTemplate let-employee let-index>
+            <a [routerLink]="employee.id + '/show'" class="">
+              <span class="underline text-blue-700">{{ employee.id }}</span>
+            </a>
+          </ng-template>
         </kendo-grid-column>
 
         <kendo-grid-column field="username" title="Username" [width]="220">
@@ -47,6 +54,11 @@
         </kendo-grid-column>
 
         <kendo-grid-column field="basicSalary" title="Base Sallary" [width]="220">
+          <ng-template kendoGridCellTemplate let-employee let-index>
+            <!-- <a [routerLink]="employee.id + '/show'" class=""> -->
+              <span class="underline text-blue-700">{{ "Rp. " + employee.basicSalary.toLocaleString('id-ID') }}</span>
+            <!-- </a> -->
+          </ng-template>
         </kendo-grid-column>
 
         <kendo-grid-column field="group" title="Group / Department" [width]="220">
@@ -55,6 +67,12 @@
         <kendo-grid-column field="status" title="Status" [width]="220">
         </kendo-grid-column>
 
+        <kendo-grid-command-column title="Action" [width]="220">
+          <ng-template kendoGridCellTemplate let-employee>
+             <a [routerLink]="employee.id + '/update'" kendoGridEditCommand class="bg-yellow-400 hover:bg-yellow-600">Edit</a>
+             <a [routerLink]="employee.id + '/delete'" kendoGridRemoveCommand class="bg-red-500 hover:bg-red-600">Remove</a>
+          </ng-template>
+       </kendo-grid-command-column>
       </kendo-grid>
     </div>
   </div>

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       // create an jwt and store inside localstorage !
       // we can't do jwt token genration here (because in case, we runing an angular framework in web context), so for simpler, use the local storage and combine with encyption to store the user session
       const {success, data} = result as ResultData;
-      console.log(success, data);
+      // console.log(success, data);
       const _toBeStored = JSON.stringify({
         email: data?.email,
         isLoggedIn: true,

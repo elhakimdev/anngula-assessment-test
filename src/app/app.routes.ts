@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/pages/login';
 import { EmployeeComponent } from './features/employee/components/employee';
+import { EmployeeCreateComponent } from './features/employee/components/employee.create';
+import { EmployeeShowComponent } from './features/employee/components/employee.show';
 
 export const routes: Routes = [
   { 
@@ -25,8 +27,12 @@ export const routes: Routes = [
         component: EmployeeComponent
       },
       {
+        path: "create",
+        component: EmployeeCreateComponent
+      },
+      {
         path: ":id/show",
-        redirectTo: "employees"
+        component: EmployeeShowComponent
       },
       {
         path: ":id/update",
