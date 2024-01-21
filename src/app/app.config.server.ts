@@ -4,7 +4,7 @@ import { appConfig } from './app.config';
 import '@angular/localize/init';
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering()
+    // provideServerRendering()
   ]
 };
 
