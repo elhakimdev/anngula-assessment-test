@@ -9,6 +9,7 @@ import { DataBindingDirective } from "@progress/kendo-angular-grid";
 import { Employye } from '../model/employee';
 import { process } from "@progress/kendo-data-query";
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from "../../auth/services/auth";
 @Component({
   standalone: true,
   templateUrl: "./../pages/employee-list.html",
@@ -25,7 +26,11 @@ export class EmployeeComponent implements OnInit {
   @ViewChild(DataBindingDirective) dataBinding: DataBindingDirective | undefined;
   public gridData: Employye[] = [];
   public gridView: Employye[] = [];
-  constructor(private service: EmployeeService, private router: Router){
+  constructor(
+    private auth: AuthService,
+    private service: EmployeeService, 
+    private router: Router
+  ){
     this.gridData = [...this.service.employees]
   }
   ngOnInit(): void {
@@ -78,5 +83,25 @@ export class EmployeeComponent implements OnInit {
     e.preventDefault();
     e.stopImmediatePropagation();
     this.router.navigateByUrl("/employees/create");
+  }
+
+  public onLogOutHandler(e: Event) {
+    e.preventDefault();
+    const cred = JSON.parse(localStorage.getItem("_data") as string) as {
+      email: string, 
+      password: string
+    };
+    // console.log(cred);
+    const credentials = {
+      ...cred
+    }
+
+    // console.log(cred);
+
+    this.auth.logout({
+      payload: {...credentials}
+    }, (err, data) => {
+      console.log(err)
+    })
   }
 }

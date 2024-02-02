@@ -97,4 +97,34 @@ export class AuthService {
       })
     })
   }
+
+  public logout(options: LoginOptions, callback: <
+    Err, 
+    Data extends Record<string, unknown>
+  >(err?: Err, data?: Data extends Record<string, unknown> ? ResultData : Data) => void): void {
+  // console.log(this.credentials);
+
+    console.log(this.credentials);
+    
+    if(this.credentials.email !== options.payload.email) {
+      // throw new Error("Error while logging out these user")
+      callback(new Error("Error while logging out these user"), {
+        success: false
+      })
+    }
+
+    this.credentials.email = "";
+    this.credentials.password = "";
+    this.credentials.state.isLoggedIn = false;
+
+    if(callback){
+      callback(null, {
+        success: true,
+        data: {
+          email: ""
+        }
+      })
+    }
+    
+  }
 }
